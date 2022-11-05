@@ -84,7 +84,11 @@ namespace ET
 			}
 
 			GUILayout.Space(5);
-			
+			if (GUILayout.Button("BuildWolongMetaDll"))
+			{
+				HybridCLRHelper.BuildWolongMetaDll();
+				AssetDatabase.SaveAssets();
+			}
 			if (GUILayout.Button("BuildPackage"))
 			{
 				if (this.platformType == PlatformType.None)

@@ -4,7 +4,8 @@
     "references": [
         "Unity.ThirdParty",
         "Unity.Core",
-        "Unity.Loader"
+        "Unity.Loader",
+        "HybridCLR.Editor"
     ],
     "includePlatforms": [
         "Editor"

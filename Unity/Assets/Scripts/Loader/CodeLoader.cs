@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using HybridCLR;
 using UnityEngine;
 
 namespace ET
@@ -88,6 +89,32 @@ namespace ET
 			Dictionary<string, Type> types = AssemblyHelper.GetAssemblyTypes(typeof (Game).Assembly, typeof(Init).Assembly, this.model, hotfixAssembly);
 			
 			EventSystem.Instance.Add(types);
+		}
+		
+		public static void LoadMetaDll()
+		{
+			// wolong补充元数据用
+			if (!Define.IsEditor)
+			{
+				string[] dlls = new[]
+				{
+					"mscorlib", "System", "System.Core", "Unity.ThirdParty", "Unity.Mono", "Unity.Core", "MongoDB.Bson"
+				};
+				for (int i = 0; i < dlls.Length; i++)
+				{
+					unsafe
+					{
+						Log.Info($"LoadMetadataForAOTAssembly:{dlls[i]}");
+						Dictionary<string, UnityEngine.Object> dictionary = AssetsBundleHelper.LoadBundle("code.unity3d");
+						byte[] dllBytes = ((TextAsset)dictionary[$"{dlls[i]}.bytes"]).bytes;
+						fixed (byte* ptr = dllBytes)
+						{
+							// 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
+							 RuntimeApi.LoadMetadataForAOTAssembly(dllBytes,HomologousImageMode.SuperSet);
+						}
+					}
+				}
+			}
 		}
 	}
 }
