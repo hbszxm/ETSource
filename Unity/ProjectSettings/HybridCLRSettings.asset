@@ -15,7 +15,8 @@ MonoBehaviour:
   enable: 1
   useGlobalIl2cpp: 0
   cloneFromGitee: 1
-  hotUpdateAssemblyDefinitions: []
+  hotUpdateAssemblyDefinitions:
+  - {fileID: 5897886265953266890, guid: 78511496abf7e044295fb494162b1ef5, type: 3}
   hotUpdateAssemblies: []
   preserveHotUpdateAssemblies: []
   hotUpdateDllCompileOutputRootDir: HybridCLRData/HotUpdateDlls

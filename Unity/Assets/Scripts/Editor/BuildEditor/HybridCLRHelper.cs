@@ -31,7 +31,7 @@ public class HybridCLRHelper
             "System",
             "System.Core",
             "Unity.Core",
-            "Unity.Mono",
+            "Unity.Loader",
             "Unity.ThirdParty",
             "MongoDB.Bson"
         };
